@@ -20,7 +20,7 @@ def main():
             print(get_terrain(tile))
             print("=====")
 
-# Break a board into tiles
+# Break a board into tiles he
 def get_tiles(image):
     tiles = []
     for y in range(5):
