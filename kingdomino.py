@@ -7,18 +7,18 @@ def main():
     print("+-------------------------------+")
     print("| King Domino points calculator |")
     print("+-------------------------------+")
-    image_path = r"King_Domino_dataset\1.jpg" #definerer en sti til billedet
+    image_path = r"C:\Users\olive\Desktop\1.jpg" #definerer en sti til billedet
     if not os.path.isfile(image_path): #tjekker om filen findes. hvis den ikke findes, så print "Image not found" og afslut programmet
         print("Image not found")
         return
-    image = cv.imread(image_path) #læser billedet fra den definerede sti, som en matrix af pixels.
-    tiles = get_tiles(image) #deler billedet op i små matricer (tiles)
-    print(len(tiles))
-    for y, row in enumerate(tiles):
-        for x, tile in enumerate(row):
-            print(f"Tile ({x}, {y}):")
-            print(get_terrain(tile))
-            print("=====") #efter endt, så looper den igennem alle tiles og printer deres koordinater og hvad den mener terrænet er.
+#    image = cv.imread(image_path) #læser billedet fra den definerede sti, som en matrix af pixels.
+#    tiles = get_tiles(image) #deler billedet op i små matricer (tiles)
+#    print(len(tiles))
+#    for y, row in enumerate(tiles):
+#        for x, tile in enumerate(row):
+#            print(f"Tile ({x}, {y}):")
+#            print(get_terrain(tile))
+#            print("=====") #efter endt, så looper den igennem alle tiles og printer deres koordinater og hvad den mener terrænet er.
 
 # Break a board into tiles he
 def get_tiles(image):
@@ -52,6 +52,26 @@ def get_terrain(tile): #først konverteres billedet fra BGR til HSV farverum. le
         return "Home"
     return "Unknown" #værdier er ikke indsat. der for returner den unknown.
 # meningen er at vi skal sætte de rigtige farveinterfaller ind i if statements, så den kan genkende de forskellige terræntyper. (eks. Hue: 30-40 =gult = field).
+
+# Hjælpefunktion: klik på et billede og få HSV-værdier 
+def pick_color(event, x, y, flags, param):
+    if event == cv.EVENT_LBUTTONDOWN:  # venstre klik med musen
+        hsv = cv.cvtColor(param, cv.COLOR_BGR2HSV)
+        pixel = hsv[y, x]
+        print(f"Klik på ({x},{y}) -> H: {pixel[0]}, S: {pixel[1]}, V: {pixel[2]}")
+
+# Kør farvevælger til at indsamle data
+def color_picker_mode(image_path):
+    img = cv.imread(image_path)
+    if img is None:
+        print("Kunne ikke åbne billedet")
+        return
+    cv.imshow("Board", img)
+    cv.setMouseCallback("Board", pick_color, img)
+    print("Klik på et felt i vinduet for at se HSV-værdier (tryk på en tast for at lukke).")
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
 if __name__ == "__main__":
     main() 
 #systemet bestemmer terræn ud fra farverne i hver tile.
