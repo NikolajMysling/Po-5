@@ -11,6 +11,9 @@ def main():
     if not os.path.isfile(image_path): #tjekker om filen findes. hvis den ikke findes, så print "Image not found" og afslut programmet
         print("Image not found")
         return
+
+    # 🔹 Start farvevælgeren
+    color_picker_mode(image_path)
 #    image = cv.imread(image_path) #læser billedet fra den definerede sti, som en matrix af pixels.
 #    tiles = get_tiles(image) #deler billedet op i små matricer (tiles)
 #    print(len(tiles))
