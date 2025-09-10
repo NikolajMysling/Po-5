@@ -8,7 +8,7 @@ def main():
     print("+-------------------------------+")
     print("| King Domino points calculator |")
     print("+-------------------------------+")
-    image_path = r"C:\Users\mmads\Documents\UNI\1. Semester\Code\AAU-DAKI-2025\King_Domino_dataset\1.jpg"
+    image_path = r"King_Domino_dataset\1.jpg"
     if not os.path.isfile(image_path):
         print("Image not found")
         return
