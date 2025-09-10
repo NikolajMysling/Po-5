@@ -2,12 +2,13 @@ import cv2 as cv #bruges til billedbehandling (f.eks. læse filer, ændre farver
 import numpy as np #bruges til matematiske beregniner af gennemsnit af pixels
 import os #bruges til at arbejde med filer og tjekke om de findes
 
+
 # Main function containing the backbone of the program
 def main():
     print("+-------------------------------+")
     print("| King Domino points calculator |")
     print("+-------------------------------+")
-    image_path = r"King_Domino_dataset\6.jpg" #definerer en sti til billedet
+    image_path = r"King_Domino_dataset\1.jpg" #definerer en sti til billedet
     if not os.path.isfile(image_path): #tjekker om filen findes. hvis den ikke findes, så print "Image not found" og afslut programmet
         print("Image not found")
         return
