@@ -2,12 +2,14 @@ import cv2 as cv
 import numpy as np
 import os
 
+from Kingdomino_pointmodel import find_clusters
+
 # Main function containing the backbone of the program
 def main():
     print("+-------------------------------+")
     print("| King Domino points calculator |")
     print("+-------------------------------+")
-    image_path = r"King_Domino_dataset\1.jpg"
+    image_path = r"King_Domino_dataset\62.jpg"
     if not os.path.isfile(image_path):
         print("Image not found")
         return
@@ -19,6 +21,7 @@ def main():
             print(f"Tile ({x}, {y}):")
             print(get_terrain(tile))
             print("=====")
+            
 
 # Break a board into tiles
 def get_tiles(image):
@@ -53,4 +56,84 @@ def get_terrain(tile):
 if __name__ == "__main__":
     main()
 
+# ...existing code...
+
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+def visualize_board(terrain_grid, clusters):
+    terrain_colors = {
+        "Field": "#ffe066",
+        "Forest": "#228B22",
+        "Lake": "#3399ff",
+        "Grassland": "#98fb98",
+        "Swamp": "#8fbc8f",
+        "Mine": "#b0b0b0",
+        "Home": "#ffb347",
+        "Unknown": "#cccccc"
+    }
+
+    fig, ax = plt.subplots(figsize=(6, 6))
+    for y, row in enumerate(terrain_grid):
+        for x, terrain in enumerate(row):
+            color = terrain_colors.get(terrain, "#cccccc")
+            rect = plt.Rectangle((x, 4-y), 1, 1, facecolor=color, edgecolor='black')
+            ax.add_patch(rect)
+            ax.text(x+0.5, 4-y+0.5, terrain[0], ha='center', va='center', fontsize=8, color='black')
+
+    # Tegn clusters med forskellige farver
+    for i, (terrain, cluster) in enumerate(clusters):
+        for (x, y) in cluster:
+            ax.plot(x+0.5, 4-y+0.5, 'o', color='red', markersize=8, alpha=0.5)
+
+    ax.set_xlim(0, 5)
+    ax.set_ylim(0, 5)
+    ax.set_xticks(range(6))
+    ax.set_yticks(range(6))
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    ax.set_title("Kingdomino Bræt Visualisering")
+    ax.set_aspect('equal')
+
+    # Legende
+    legend_patches = [mpatches.Patch(color=color, label=terrain) for terrain, color in terrain_colors.items()]
+    plt.legend(handles=legend_patches, bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    plt.show()
+
+# ...existing code...
+
+def main():
+    print("+-------------------------------+")
+    print("| King Domino points calculator |")
+    print("+-------------------------------+")
     
+    image_path = r"King_Domino_dataset\1.jpg"
+    if not os.path.isfile(image_path):
+        print("Image not found")
+        return
+
+    image = cv.imread(image_path)
+    tiles = get_tiles(image)
+
+    # Lav grid med terræner
+    terrain_grid = []
+    for y, row in enumerate(tiles):
+        terrain_row = []
+        for x, tile in enumerate(row):
+            terrain_type = get_terrain(tile)
+            terrain_row.append(terrain_type)
+        terrain_grid.append(terrain_row)
+
+    # Find sammenhængende felter
+    clusters = find_clusters(terrain_grid)
+    print("\nSammenhængende områder på brættet:")
+    for terrain, cluster in clusters:
+        print(f"{terrain}: {len(cluster)} felter -> {cluster}")
+
+    # Visualiser brættet og clusters
+    visualize_board(terrain_grid, clusters)
+
+if __name__ == "__main__":
+    main()
+# ...existing code...
