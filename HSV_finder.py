@@ -37,20 +37,21 @@ def get_terrain(tile):
     hsv_tile = cv.cvtColor(tile, cv.COLOR_BGR2HSV)
     hue, saturation, value = np.median(hsv_tile, axis=(0,1)) # Consider using median instead of mean
     print(f"H: {hue}, S: {saturation}, V: {value}")
-    if 22 < hue < 27 and 235 < saturation < 256 and 157 < value < 199:
+    if 21 < hue < 28 and 218 < saturation < 256 and 136< value < 208:
         return "Field"
-    if 33 < hue < 61 and 77 < saturation < 226 and 32 < value < 65:
+    if 28 < hue < 80 and 67 < saturation < 226 and 24 < value < 74:
         return "Forest"
-    if 104 < hue < 110 and 223 < saturation < 256 and 114 < value < 185:
+    if 103 < hue < 110 and 223 < saturation < 256 and 115 < value < 199:
         return "Lake"
-    if 33 < hue < 46 and 201 < saturation < 246 and 101 < value < 157:
+    if 33 < hue < 48 and 159 < saturation < 249 and 75 < value < 165:
         return "Grassland"
-    if 18 < hue < 27 and 51 < saturation < 162 and 78 < value < 124:
+    if 17 < hue < 27 and 34 < saturation < 181 and 72 < value < 145:
         return "Swamp"
-    if 21 < hue < 25 and 50 < saturation < 133 and 22 < value < 65:
+    if 17 < hue < 26 and 39 < saturation < 156 and 23 < value < 72:
         return "Mine"
-    if 20 < hue < 35 and 50 < saturation < 111 and 72 < value < 142:
+    if 16 < hue < 87 and 40 < saturation < 141 and 52 < value < 145:
         return "Home"
+    
     return "Unknown"
 
 if __name__ == "__main__":
@@ -108,7 +109,7 @@ def main():
     print("| King Domino points calculator |")
     print("+-------------------------------+")
     
-    image_path = r"King_Domino_dataset\1.jpg"
+    image_path = r"King_Domino_dataset\4.jpg"
     if not os.path.isfile(image_path):
         print("Image not found")
         return
