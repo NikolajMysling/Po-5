@@ -96,7 +96,6 @@ def visualize_board(terrain_grid, clusters):
     ax.set_title("Kingdomino Bræt Visualisering")
     ax.set_aspect('equal')
 
-    # Legende
     legend_patches = [mpatches.Patch(color=color, label=terrain) for terrain, color in terrain_colors.items()]
     plt.legend(handles=legend_patches, bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
