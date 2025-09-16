@@ -57,7 +57,7 @@ def get_terrain(tile):
 if __name__ == "__main__":
     main()
 
-# ...existing code...
+# Visualisering af brættet og sammenhængende felter
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -96,18 +96,13 @@ def visualize_board(terrain_grid, clusters):
     ax.set_title("Kingdomino Bræt Visualisering")
     ax.set_aspect('equal')
 
+
     legend_patches = [mpatches.Patch(color=color, label=terrain) for terrain, color in terrain_colors.items()]
     plt.legend(handles=legend_patches, bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
     plt.show()
 
-# ...existing code...
-
 def main():
-    print("+-------------------------------+")
-    print("| King Domino points calculator |")
-    print("+-------------------------------+")
-    
     image_path = r"King_Domino_dataset\1.jpg"
     if not os.path.isfile(image_path):
         print("Image not found")
@@ -136,4 +131,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-# ...existing code...
+    
