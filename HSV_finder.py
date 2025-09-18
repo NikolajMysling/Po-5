@@ -4,7 +4,7 @@ import os
 
 from Kingdomino_pointmodel import find_clusters
 
-# Main function containing the backbone of the program
+
        
 
 # Break a board into tiles
