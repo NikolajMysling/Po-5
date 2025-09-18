@@ -5,23 +5,7 @@ import os
 from Kingdomino_pointmodel import find_clusters
 
 # Main function containing the backbone of the program
-def main():
-    print("+-------------------------------+")
-    print("| King Domino points calculator |")
-    print("+-------------------------------+")
-    image_path = r"King_Domino_dataset\62.jpg"
-    if not os.path.isfile(image_path):
-        print("Image not found")
-        return
-    image = cv.imread(image_path)
-    tiles = get_tiles(image)
-    print(len(tiles))
-    for y, row in enumerate(tiles):
-        for x, tile in enumerate(row):
-            print(f"Tile ({x}, {y}):")
-            print(get_terrain(tile))
-            print("=====")
-            
+       
 
 # Break a board into tiles
 def get_tiles(image):
@@ -54,8 +38,7 @@ def get_terrain(tile):
     
     return "Unknown"
 
-if __name__ == "__main__":
-    main()
+
 
 # Visualisering af brættet og sammenhængende felter
 
